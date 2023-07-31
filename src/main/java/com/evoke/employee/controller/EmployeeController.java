@@ -31,6 +31,11 @@ public class EmployeeController {
 
     @GetMapping("/employee/{id}")
     public ResponseEntity<EmployeeDto> getEmployeeById(@PathVariable Long id) {
-        return ResponseEntity.ok().body(mapper.toDto(employeeService.getEmployeeById(id)));
+        return ResponseEntity.ok().body(mapper.toDto(employeeService.getEmployeeById(id).get()));
+    }
+
+    @DeleteMapping("/employee/{id}")
+    public void deleteEmployeeById(@PathVariable Long id){
+         employeeService.deleteEmployeeById(id);
     }
 }

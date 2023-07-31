@@ -1,7 +1,9 @@
 package com.evoke.employee.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Timestamp;
@@ -12,6 +14,8 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "employee")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Employee {
 
     @Id
@@ -46,17 +50,5 @@ public class Employee {
 
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "employees")
     private List<OrganizationHistory> organizationHistories;
-
-
-    public Employee() {
-    }
-
-    public Employee(String email, String firstName, String lastName, String phoneNumber, String password) {
-        this.email = email;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.phoneNumber = phoneNumber;
-        this.password = password;
-    }
 
 }
