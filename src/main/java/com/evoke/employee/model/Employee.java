@@ -16,6 +16,7 @@ import java.util.List;
 @Table(name = "employee")
 @AllArgsConstructor
 @NoArgsConstructor
+@NamedQuery(name ="select_all_employee",query = "select e from Employee e")
 public class Employee {
 
     @Id
@@ -34,17 +35,17 @@ public class Employee {
 
     private Timestamp createdAt;
 
-    @OneToOne(mappedBy = "employee")
+    @OneToOne(mappedBy = "employee",cascade = CascadeType.ALL)
     private PersonalInformation personalInformation;
 
 
-    @OneToOne(mappedBy = "employee")
+    @OneToOne(mappedBy = "employee",cascade = CascadeType.ALL)
     private Address address;
 
-    @OneToOne(mappedBy = "employee")
+    @OneToOne(mappedBy = "employee",cascade = CascadeType.ALL)
     private Project project;
 
-    @OneToMany(mappedBy = "employee")
+    @OneToMany(mappedBy = "employee",cascade = CascadeType.ALL)
     private List<Hobbies> hobbies = Collections.emptyList();
 
 

@@ -1,0 +1,26 @@
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+
+    <!-- Define a console appender with a custom log pattern -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Log to a file as well -->
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logfile.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logfile.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="com.evoke.employee.controller" level="DEBUG">
+        <appender-ref ref="file" />
+    </logger>
+</configuration>

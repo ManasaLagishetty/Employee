@@ -6,10 +6,13 @@ import com.evoke.employee.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,8 +28,11 @@ public class EmployeeService {
         return employeeRepository.save(employee);
     }
 
-    public List<Employee> getEmployee() {
-        return employeeRepository.findAll();
+    public Page<Employee> getEmployee(int pageNumber,int pageSize,String sort1) {
+        Sort sort=Sort.by(Sort.Direction.ASC,sort1);
+        Pageable pageable= PageRequest.of(pageNumber,pageSize,sort);
+        Page<Employee> employeePage = employeeRepository.findAll(pageable);
+        return employeePage;
     }
 
     @Cacheable(value="employee" ,key="#id")
